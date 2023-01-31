@@ -12,7 +12,6 @@ const createProduct = async (req, res) => {
       image: req.file.filename,
       modelNo: req.body.model,
     });
-    // await newProduct.save()
     res.status(200).json({
       success: true,
       newProduct,
