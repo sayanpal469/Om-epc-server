@@ -13,6 +13,10 @@ const getRequestSchema = mongoose.Schema({
         type: Number,
         required: [true, 'Please enter your mobile number']
     },
+    message: {
+        type: String,
+        required: [true, 'Please write your message']
+    },
     visitStatus: {
         type: Boolean,
         default: false
