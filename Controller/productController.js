@@ -36,12 +36,8 @@ const upload = multer({
 }).single('image')
 
 // Create product
-const createProduct = (async (req, res) => {
+const createProduct = async (req, res) => {
     upload(req, res, async (err) => {
-        console.log('req.files:', req.files);
-        console.log('req.file:', req.file);
-        console.log('req.file.filename:', req.file.filename);
-        console.log('err:', err);
         if (!err) {
             try {
                 const newProduct = await Products.create({
@@ -68,9 +64,7 @@ const createProduct = (async (req, res) => {
         }
 
     })
-    // console.log(req.file);
-
-})
+}
 
 
 
