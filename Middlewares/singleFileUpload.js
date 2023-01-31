@@ -8,7 +8,6 @@ const STORAGE = multer.diskStorage({
     cb(null, UPLOAD_FOLDER);
   },
   filename: (req, file, cb) => {
-    console.log(file);
     const fileExt = path.extname(file.originalname);
     const fileName =
       file.originalname
@@ -42,10 +41,6 @@ const upload = multer({
 
 const singleFileUpload = (req, res, next) => {
   upload(req, res, (err) => {
-    // console.log('req.files:', req.files);
-    // console.log('req.file:', req.file);
-    // console.log('req.file.filename:', req.file.filename);
-    console.log('err:', err);
     if (!err) {
       next();
     } else {
