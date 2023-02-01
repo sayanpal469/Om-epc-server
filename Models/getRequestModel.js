@@ -17,7 +17,7 @@ const getRequestSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please write your message']
     },
-    visitStatus: {
+    responseStatus: {
         type: Boolean,
         default: false
     },

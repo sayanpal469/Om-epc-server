@@ -25,6 +25,10 @@ const buyProductFormSchema = mongoose.Schema({
         type: Number,
         required: [true, 'Please provide your phone number']
     },
+    responseStatus: {
+        type: Boolean,
+        default: false
+    },
     createdAt: {
         type: Date,
         default: Date.now

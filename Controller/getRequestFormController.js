@@ -21,7 +21,7 @@ const createGetRequest = async (req, res) => {
 const getAllRequest = async (req, res) => {
     try {
         const allRequest = await GetRequestForm.find()
-        if(!allRequest) {
+        if (!allRequest) {
             res.status(404).json({
                 success: false,
                 message: 'Request not found'
@@ -45,10 +45,10 @@ const getRequestByEmail = async (req, res) => {
         const getRequestClient = await GetRequestForm.find({
             email: req.params.email
         })
-        if(!getRequestClient) {
-           res.status(404).json({
+        if (!getRequestClient) {
+            res.status(404).json({
                 success: false,
-                message: 'Get request user not found'
+                message: 'User does not exist'
             })
         }
         res.status(201).json({
@@ -62,8 +62,34 @@ const getRequestByEmail = async (req, res) => {
     }
 }
 
+// Update responce
+const updateGetRequest = async (req, res) => {
+    try {
+        let responseStatus = await GetRequestForm.findById(req.params.id)
+        if (!responseStatus) {
+            res.status(404).json({
+                success: false,
+                message: 'Request not found'
+            })
+        } else {
+            responseStatus = await GetRequestForm.findByIdAndUpdate(req.params.id, req.body, {
+                new: true
+            })
+            res.status(200).json({
+                success: true,
+                responseStatus
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
 module.exports = {
     createGetRequest,
     getAllRequest,
-    getRequestByEmail
+    getRequestByEmail,
+    updateGetRequest
 }

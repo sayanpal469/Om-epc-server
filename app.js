@@ -4,6 +4,7 @@ const multer = require('multer');
 const bodyParser = require('body-parser');
 const getRequestRoutes = require('./Routes/getRequestRoutes');
 const productRoutes = require('./Routes/productRoutes');
+const buyRequestRoutes = require('./Routes/buyRequestRoutes');
 const app = express();
 
 
@@ -23,6 +24,11 @@ app.use('/api/omEpc', getRequestRoutes);
 
 // Product api
 app.use('/api/omEpc', productRoutes)
+
+// Customer buy request api
+app.use('/api/omEpc', buyRequestRoutes)
+
+
 
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to Om-Epc server')
