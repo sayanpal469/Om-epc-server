@@ -1,16 +1,15 @@
-const Products = require('../Models/productModel');
+const Service = require('../Models/serviceModel');
 
-// Create product
-const createProduct = async (req, res) => {
+// Create service
+const createService = async (req, res) => {
     try {
-        const newProduct = await Products.create({
-            name: req.body.name,
+        const newService = await Service.create({
             image: req.file.filename,
-            modelNo: req.body.model,
+            category: req.body.category,
         });
         res.status(200).json({
             success: true,
-            newProduct,
+            newService,
         });
     } catch (error) {
         res.status(500).json({
@@ -20,19 +19,19 @@ const createProduct = async (req, res) => {
     }
 };
 
-// Get all products
-const getProducts = async (req, res) => {
+// Get all services
+const getServices = async (req, res) => {
     try {
-        const products = await Products.find()
-        if (!products) {
+        const services = await Service.find()
+        if (!services) {
             res.status(404).json({
                 success: false,
-                message: 'Product not found'
+                message: 'service not found'
             })
         } else {
             res.status(200).json({
                 success: true,
-                products
+                services
             })
         }
     } catch (error) {
@@ -43,19 +42,19 @@ const getProducts = async (req, res) => {
     }
 }
 
-// Get singel product
-const getSingelProduct = async (req, res) => {
+// Get singel service
+const getSingelService = async (req, res) => {
     try {
-        const product = await Products.findById(req.params.id)
-        if (!product) {
+        const service = await Service.findById(req.params.id)
+        if (!service) {
             res.status(404).json({
                 success: false,
-                message: 'Product not found'
+                message: 'Service not found'
             })
         } else {
             res.status(200).json({
                 success: true,
-                product
+                service
             })
         }
     } catch (error) {
@@ -66,19 +65,20 @@ const getSingelProduct = async (req, res) => {
     }
 }
 
-// Delete Product
-const deleteProduct = async (req, res) => {
+
+// Delete Service
+const deleteService = async (req, res) => {
     try {
-        const product = await Products.findByIdAndDelete(req.params.id)
-        if (!product) {
+        const service = await Service.findByIdAndDelete(req.params.id)
+        if (!service) {
             res.status(404).json({
                 success: false,
+                message: 'service not found'
+            })
+        } else {
+            res.status(200).json({
+                success: true,
                 message: 'Deleted successfully'
-            })
-        } else {
-            res.status(200).json({
-                success: true,
-                product
             })
         }
     } catch (error) {
@@ -90,8 +90,8 @@ const deleteProduct = async (req, res) => {
 }
 
 module.exports = {
-    createProduct,
-    getProducts,
-    getSingelProduct,
-    deleteProduct
-};
+    createService,
+    getServices,
+    getSingelService,
+    deleteService
+}
