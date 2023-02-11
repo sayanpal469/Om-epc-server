@@ -9,12 +9,16 @@ const serviceRoutes = require('./Routes/serviceRoutes');
 const serviceRequestRoute = require('./Routes/serviceRequestRoutes');
 const signupRoutes = require('./Routes/authRoutes/signUpRoutes');
 const loginRoutes = require('./Routes/authRoutes/loginRoutes');
+const checkEmailRoutes = require('./Routes/authRoutes/checkEmailRoutes');
+const forgetPassRoutes = require('./Routes/authRoutes/forgetPassRoutes');
 const app = express();
 
 app.use(express.json());
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}));
+
+app.use('/uploads', express.static('uploads'))
 
 
 // Get customer request api
@@ -37,6 +41,11 @@ app.use('/api/omEpc', signupRoutes)
 
 // login api
 app.use('/api/omEpc', loginRoutes)
+
+// Check for forget password api
+app.use('/api/omEpc', checkEmailRoutes)
+app.use('/api/omEpc', forgetPassRoutes)
+
 
 
 app.get('/', (req, res) => {

@@ -5,10 +5,6 @@ const serviceRequestSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide date which you need']
     },
-    slot: {
-        type: String,
-        required: [true, 'Please book a slot which you need']
-    },
     category: {
         type: String,
         required: [true, 'Please provide service category']
@@ -25,13 +21,9 @@ const serviceRequestSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide operating system']
     },
-    firstName: {
+    clientName: {
         type: String,
         required: [true, 'Please provide your first name']
-    },
-    lastName: {
-        type: String,
-        required: [true, 'Please provide your last name']
     },
     email: {
         type: String,

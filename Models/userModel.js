@@ -27,10 +27,12 @@ var UserSchema = mongoose.Schema({
     },
     image: {
         type: String,
-        required: [true, 'Please provide your profile picture']
+        default: 'default-avatar-1675920003007.png'
     },
-}, {
-    timestamps: true
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 module.exports = mongoose.model('User', UserSchema);
