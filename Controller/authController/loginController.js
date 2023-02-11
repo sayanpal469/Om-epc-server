@@ -1,5 +1,6 @@
 const User = require('../../Models/userModel');
-// .select('-password')
+
+
 // find user
 const getUser = async (req, res) => {
     try {
@@ -19,7 +20,12 @@ const getUser = async (req, res) => {
                     })
 
                 }
-            } 
+            } else {
+                res.status(402).json({
+                    success: false,
+                    message: 'This email does not exists'
+                })
+            }
         } else {
             res.status(500).json({
                 message: 'Please fill the inputs'
