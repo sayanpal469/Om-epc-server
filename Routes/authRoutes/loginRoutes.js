@@ -3,6 +3,6 @@ const { userLogin, getUsers } = require('../../Controller/authController/loginCo
 const loginRoutes = require('express').Router();
 
 loginRoutes.route('/login').post(userLogin);
-loginRoutes.route('/login/users').get(getUsers);
+loginRoutes.route('/login/user/:email').get(getUsers);
 
 module.exports = loginRoutes;
