@@ -20,6 +20,8 @@ const createProduct = async (req, res) => {
     }
 };
 
+
+
 // Get all products
 const getProducts = async (req, res) => {
     try {

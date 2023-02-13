@@ -2,11 +2,13 @@ const User = require('../../Models/userModel');
 
 
 // find user
-const getUser = async (req, res) => {
+const userLogin = async (req, res) => {
     try {
         // let msg;
         if (req.body.email && req.body.password) {
-            let user = await User.findOne({email: req.body.email});
+            let user = await User.findOne({
+                email: req.body.email
+            });
             // console.log(user.password)
             if (user) {
                 if (req.body.password == user.password) {
@@ -39,6 +41,33 @@ const getUser = async (req, res) => {
     }
 }
 
+
+// Get all user
+const getUsers = async (req, res) => {
+    try {
+        const users = await User.find()
+
+        if (!users) {
+            res.status(404).json({
+                success: false,
+                message: 'User not found'
+            })
+        } else {
+            res.status(200).json({
+                success: true,
+                users
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+
 module.exports = {
-    getUser
+    userLogin,
+    getUsers
 }
