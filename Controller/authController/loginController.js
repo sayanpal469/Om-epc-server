@@ -42,7 +42,7 @@ const userLogin = async (req, res) => {
 }
 
 
-// Get all user
+// Get user
 const getUsers = async (req, res) => {
     try {
         const user = await User.findOne({email: req.params.email})
@@ -66,8 +66,32 @@ const getUsers = async (req, res) => {
     }
 }
 
+// Get all users
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find()
+
+        if (!users) {
+            res.status(404).json({
+                success: false,
+                message: 'Users not found'
+            })
+        } else {
+            res.status(200).json({
+                success: true,
+                users
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
 
 module.exports = {
     userLogin,
-    getUsers
+    getUsers,
+    getAllUsers
 }

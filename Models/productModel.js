@@ -5,13 +5,13 @@ const productSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide product name']
     },
-    image: {
-        type: String,
-        required: [true, 'Please provide product image']
-    },
     modelNo: {
         type: Number,
         required: [true, 'Please provide product model number']
+    },
+    image: {
+        type: String,
+        required: [true, 'Please provide product image']
     },
     createdAt: {
         type: Date,

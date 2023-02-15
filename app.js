@@ -48,6 +48,7 @@ app.use('/api/omEpc', forgetPassRoutes)
 
 
 
+
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to Om-Epc server')
 })

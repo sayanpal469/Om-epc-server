@@ -3,10 +3,11 @@ const Products = require('../Models/productModel');
 // Create product
 const createProduct = async (req, res) => {
     try {
+        // console.log(req.file)
         const newProduct = await Products.create({
             name: req.body.name,
-            image: req.file.filename,
             modelNo: req.body.model,
+            image: req.file.filename,
         });
         res.status(200).json({
             success: true,
@@ -71,15 +72,16 @@ const getSingelProduct = async (req, res) => {
 // Delete Product
 const deleteProduct = async (req, res) => {
     try {
-        const product = await Products.findByIdAndDelete(req.params.id)
+        const product = await Products.findByIdAndDelete({_id: req.params.id})
         if (!product) {
             res.status(404).json({
                 success: false,
-                message: 'Deleted successfully'
+                message: 'Not found'
             })
         } else {
             res.status(200).json({
                 success: true,
+                message: 'Product deleted',
                 product
             })
         }
