@@ -8,6 +8,7 @@ const createProduct = async (req, res) => {
             name: req.body.name,
             modelNo: req.body.model,
             image: req.file.filename,
+            price: req.body.price
         });
         res.status(200).json({
             success: true,

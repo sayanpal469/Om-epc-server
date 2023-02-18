@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
 const serviceSchema = mongoose.Schema({
-    image: {
+    item: {
         type: String,
-        required: [true, 'Please provide service image']
+        default: 'computer'
     },
     category: {
         type: String,
         required: [true, 'Please provide service category']
+    },
+    image: {
+        type: String,
+        required: [true, 'Please provide service image']
     },
     createdAt: {
         type: Date,

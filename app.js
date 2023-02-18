@@ -5,12 +5,14 @@ const bodyParser = require('body-parser');
 const getRequestRoutes = require('./Routes/getRequestRoutes');
 const productRoutes = require('./Routes/productRoutes');
 const buyRequestRoutes = require('./Routes/buyRequestRoutes');
-const serviceRoutes = require('./Routes/serviceRoutes');
-const serviceRequestRoute = require('./Routes/serviceRequestRoutes');
+
 const signupRoutes = require('./Routes/authRoutes/signUpRoutes');
 const loginRoutes = require('./Routes/authRoutes/loginRoutes');
 const checkEmailRoutes = require('./Routes/authRoutes/checkEmailRoutes');
 const forgetPassRoutes = require('./Routes/authRoutes/forgetPassRoutes');
+const serviceRoutes = require('./Routes/serviceRoutes');
+const computerServiceRequestRoute = require('./Routes/serviceRequestRoutes/computerServiceRequestRoutes');
+const upsServiceRequestRoutes = require('./Routes/serviceRequestRoutes/upsServiceRequestRoutes');
 const app = express();
 
 app.use(express.json());
@@ -33,8 +35,12 @@ app.use('/api/omEpc', buyRequestRoutes)
 // Services api
 app.use('/api/omEpc', serviceRoutes)
 
-// Services request api
-app.use('/api/omEpc', serviceRequestRoute)
+
+// Services requests apis =======================
+// Computer and laptop services requests api
+app.use('/api/omEpc', computerServiceRequestRoute)
+// UPS services requests api
+app.use('/api/omEpc', upsServiceRequestRoutes)
 
 // Sign up api
 app.use('/api/omEpc', signupRoutes)

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const serviceRequestSchema = mongoose.Schema({
+const computerServiceRequestSchema = mongoose.Schema({
     collectionDate: {
         type: String,
         required: [true, 'Please provide date which you need']
@@ -59,4 +59,4 @@ const serviceRequestSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('serviceRequest', serviceRequestSchema);
+module.exports = mongoose.model('computerServiceRequest', computerServiceRequestSchema);
