@@ -13,6 +13,8 @@ const forgetPassRoutes = require('./Routes/authRoutes/forgetPassRoutes');
 const serviceRoutes = require('./Routes/serviceRoutes');
 const computerServiceRequestRoute = require('./Routes/serviceRequestRoutes/computerServiceRequestRoutes');
 const upsServiceRequestRoutes = require('./Routes/serviceRequestRoutes/upsServiceRequestRoutes');
+const printerServiceRequestRoutes = require('./Routes/serviceRequestRoutes/printerServiceRequestRoutes');
+const surveillanceServiceRequestRoutes = require('./Routes/serviceRequestRoutes/surveillanceServiceRequestRoutes');
 const app = express();
 
 app.use(express.json());
@@ -41,6 +43,10 @@ app.use('/api/omEpc', serviceRoutes)
 app.use('/api/omEpc', computerServiceRequestRoute)
 // UPS services requests api
 app.use('/api/omEpc', upsServiceRequestRoutes)
+// Printer services requests api
+app.use('/api/omEpc', printerServiceRequestRoutes)
+// Surveillance services requests api
+app.use('/api/omEpc', surveillanceServiceRequestRoutes)
 
 // Sign up api
 app.use('/api/omEpc', signupRoutes)

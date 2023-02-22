@@ -1,4 +1,4 @@
-const { createUpsServiceRequest, getUpsServiceRequest, updateUpsServiceStatus } = require('../../Controller/serviceRequest/upsServiceController');
+const { createUpsServiceRequest, getUpsServiceRequest, updateUpsServiceStatus } = require('../../Controller/serviceRequest/upsServiceRequestController');
 
 const upsServiceRequestRoutes = require('express').Router();
 
