@@ -15,6 +15,7 @@ const computerServiceRequestRoute = require('./Routes/serviceRequestRoutes/compu
 const upsServiceRequestRoutes = require('./Routes/serviceRequestRoutes/upsServiceRequestRoutes');
 const printerServiceRequestRoutes = require('./Routes/serviceRequestRoutes/printerServiceRequestRoutes');
 const surveillanceServiceRequestRoutes = require('./Routes/serviceRequestRoutes/surveillanceServiceRequestRoutes');
+const computerRoutes = require('./Routes/ProductsRoutes/computerRoutes');
 const app = express();
 
 app.use(express.json());
@@ -28,7 +29,14 @@ app.use('/uploads', express.static('uploads'))
 // Get customer request api
 app.use('/api/omEpc', getRequestRoutes);
 
-// Product api
+// Product apis=============================
+// Computer api=========
+app.use('/api/omEpc', computerRoutes)
+
+
+
+
+
 app.use('/api/omEpc', productRoutes)
 
 // Customer buy request api
@@ -38,7 +46,7 @@ app.use('/api/omEpc', buyRequestRoutes)
 app.use('/api/omEpc', serviceRoutes)
 
 
-// Services requests apis =======================
+// Services requests apis starts here =======================
 // Computer and laptop services requests api
 app.use('/api/omEpc', computerServiceRequestRoute)
 // UPS services requests api
@@ -47,6 +55,7 @@ app.use('/api/omEpc', upsServiceRequestRoutes)
 app.use('/api/omEpc', printerServiceRequestRoutes)
 // Surveillance services requests api
 app.use('/api/omEpc', surveillanceServiceRequestRoutes)
+// Services requests apis ends here =======================
 
 // Sign up api
 app.use('/api/omEpc', signupRoutes)

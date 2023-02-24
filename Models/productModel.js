@@ -6,7 +6,7 @@ const productSchema = mongoose.Schema({
         required: [true, 'Please provide product name']
     },
     model: {
-        type: Number,
+        type: String,
         required: [true, 'Please provide product model name']
     },
     image: {
@@ -16,6 +16,18 @@ const productSchema = mongoose.Schema({
     price: {
         type: Number,
         required: [true, 'Please provide product price']
+    },
+    category: {
+        type: String,
+        required: [true, 'Please provide product category']
+    },
+    brand: {
+        type: String,
+        required: [true, 'Please provide product brand']
+    },
+    description: {
+        type: String,
+        required: [true, 'Please provide product description']
     },
     createdAt: {
         type: Date,
