@@ -16,6 +16,9 @@ const upsServiceRequestRoutes = require('./Routes/serviceRequestRoutes/upsServic
 const printerServiceRequestRoutes = require('./Routes/serviceRequestRoutes/printerServiceRequestRoutes');
 const surveillanceServiceRequestRoutes = require('./Routes/serviceRequestRoutes/surveillanceServiceRequestRoutes');
 const computerRoutes = require('./Routes/ProductsRoutes/computerRoutes');
+const UpsRoutes = require('./Routes/ProductsRoutes/upsRoutes');
+const PrinterRoutes = require('./Routes/ProductsRoutes/printerRoutes');
+const SurveillanceRoutes = require('./Routes/ProductsRoutes/surveillanceRoutes');
 const app = express();
 
 app.use(express.json());
@@ -30,8 +33,18 @@ app.use('/uploads', express.static('uploads'))
 app.use('/api/omEpc', getRequestRoutes);
 
 // Product apis=============================
+
 // Computer api=========
-app.use('/api/omEpc', computerRoutes)
+app.use('/api/omEpc', computerRoutes);
+
+// UPS api=========
+app.use('/api/omEpc', UpsRoutes);
+
+// Printer api=========
+app.use('/api/omEpc', PrinterRoutes);
+
+// Surveillance api=========
+app.use('/api/omEpc', SurveillanceRoutes);
 
 
 

@@ -1,0 +1,15 @@
+Ups model schema=====
+[brand, modelNumber, modelName, color, inputVoltage, 
+outputVoltage, outputPlugsNumber, phase, batteriesNumber,
+fullLoadRuntime, image, price, wrongPrice,warranty,
+description];
+
+Printer model schema=====
+[printingMethod, type, modelName, brand,
+refilType, image, price, wrongPrice,
+warranty, description];
+
+Surveillance model schema======
+[modelNumber, modelName, brand, recordResolution,
+color, image, price, wrongPrice,
+warranty, description];
