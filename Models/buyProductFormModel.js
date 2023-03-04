@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 
-const buyProductFormSchema = mongoose.Schema({
-    productName: {
-        type: String,
-        required: true
-    },
-    modelNo: {
-        type: Number,
-        required: true
-    },
+const userOrders = mongoose.Schema({
     firstName: {
         type: String,
         required: [true, 'Please provide your first name']
@@ -16,6 +8,14 @@ const buyProductFormSchema = mongoose.Schema({
     lastName: {
         type: String,
         required: [true, 'Please provide your last name']
+    },
+    address: {
+        type: String,
+        required: [true, 'Please provide your street address']
+    },
+    city: {
+        type: String,
+        required: [true, 'Please provide your city']
     },
     email: {
         type: String,
@@ -25,11 +25,37 @@ const buyProductFormSchema = mongoose.Schema({
         type: Number,
         required: [true, 'Please provide your phone number']
     },
-    quantity: {
+    postCode: {
+        type: Number,
+        required: [true, 'Please provide your phone number']
+    },
+    Quantity: {
         type: Number,
         default: 1
     },
-    responseStatus: {
+    totalBill: {
+        type: Number,
+    },
+    product: {
+        type: Object
+    },
+    isOrder: {
+        type: Boolean,
+        default: true
+    },
+    isApproved: {
+        type: Boolean,
+        default: true
+    },
+    isShipped: {
+        type: Boolean,
+        default: false
+    },
+    isCanceled: {
+        type: Boolean,
+        default: false
+    },
+    isCompleted: {
         type: Boolean,
         default: false
     },
@@ -39,4 +65,4 @@ const buyProductFormSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('buyProductUser', buyProductFormSchema)
+module.exports = mongoose.model('userOrder', userOrders)

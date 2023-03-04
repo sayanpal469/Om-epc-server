@@ -31,7 +31,7 @@ const createProduct = async (req, res) => {
 const getProducts = async (req, res) => {
     try {
         const products = await Products.find()
-        if (!products) {
+        if (!products.length) {
             res.status(404).json({
                 success: false,
                 message: 'Product not found'

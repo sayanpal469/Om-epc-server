@@ -4,7 +4,7 @@ const Computers = require('../../Models/ProductModels/computerModel');
 const createComputer = async (req, res) => {
     try {
         // console.log(req.file)
-        const newProduct = await Computers.create({
+        const data = await Computers.create({
             modelName: req.body.modelName,
             series: req.body.series,
             brand: req.body.brand,
@@ -28,7 +28,7 @@ const createComputer = async (req, res) => {
         });
         res.status(200).json({
             success: true,
-            newProduct,
+            data,
             message: 'Product created successfully'
         });
     } catch (error) {
@@ -42,8 +42,8 @@ const createComputer = async (req, res) => {
 // Get all comuter
 const getComputers = async (req, res) => {
     try {
-        const computers = await Computers.find()
-        if (!computers) {
+        const data = await Computers.find()
+        if (!data.length) {
             res.status(404).json({
                 success: false,
                 message: 'computer not found'
@@ -51,7 +51,7 @@ const getComputers = async (req, res) => {
         } else {
             res.status(200).json({
                 success: true,
-                computers
+                data
             })
         }
     } catch (error) {
@@ -66,8 +66,8 @@ const getComputers = async (req, res) => {
 // Get singel computer
 const getSingelComputer = async (req, res) => {
     try {
-        const computer = await Computers.findById(req.params.id)
-        if (!computer) {
+        const data = await Computers.findById(req.params.id)
+        if (!data) {
             res.status(404).json({
                 success: false,
                 message: 'Computer not found'
@@ -75,7 +75,7 @@ const getSingelComputer = async (req, res) => {
         } else {
             res.status(200).json({
                 success: true,
-                computer
+                data
             })
         }
     } catch (error) {
@@ -89,8 +89,8 @@ const getSingelComputer = async (req, res) => {
 // Delete computer
 const deleteComputer = async (req, res) => {
     try {
-        const computer = await Computers.findByIdAndDelete(req.params.id)
-        if (!computer) {
+        const data = await Computers.findByIdAndDelete(req.params.id)
+        if (!data) {
             res.status(404).json({
                 success: false,
                 message: 'computer not found'
