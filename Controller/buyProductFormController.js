@@ -76,7 +76,7 @@ const getBuyRequestByEmail = async (req, res) => {
     }
 }
 
-// Update buy request
+// Update Shipped order
 const updateShipped = async (req, res) => {
     try {
         let data = await UserOrders.findById(req.params.id)
@@ -101,6 +101,34 @@ const updateShipped = async (req, res) => {
         })
     }
 };
+
+// Update Complete order
+const updateComplete = async (req, res) => {
+    try {
+        let data = await UserOrders.findById(req.params.id)
+        if (!data) {
+            res.status(404).json({
+                success: false,
+                message: 'Order not found'
+            })
+        } else {
+            data = await UserOrders.findByIdAndUpdate(req.params.id, req.body, {
+                new: true
+            })
+            res.status(200).json({
+                success: true,
+                data
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+};
+
+
 
 const updateCanceled = async (req, res) => {
     try {
@@ -156,6 +184,7 @@ module.exports = {
     getAllBuyRequest,
     getBuyRequestByEmail,
     updateShipped,
+    updateComplete,
     updateCanceled,
     deleteOrder
 }
