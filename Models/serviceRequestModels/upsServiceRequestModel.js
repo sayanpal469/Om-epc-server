@@ -5,9 +5,17 @@ const upsServiceRequestSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide date which you need']
     },
+    type: {
+        type: String,
+        default: 'ups'
+    },
     category: {
         type: String,
         required: [true, 'Please provide service category']
+    },
+    item: {
+        type: String,
+        default: 'ups'
     },
     brand: {
         type: String,

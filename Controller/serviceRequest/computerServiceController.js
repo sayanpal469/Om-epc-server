@@ -53,14 +53,14 @@ const getComputerServiceRequestByEmail = async (req, res) => {
                 message: 'User does not exist'
             })
         } else {
-            const serviceRequest = await ComputerServiceRequest.find({
+            const data = await ComputerServiceRequest.find({
                 email: req.params.email,
                 isRequest: true
             });
-            if (serviceRequest.length) {
+            if (data.length) {
                 res.status(200).json({
                     success: true,
-                    serviceRequest
+                    data
                 })
             } else {
                 res.status(401).json({

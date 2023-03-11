@@ -5,6 +5,10 @@ const computerServiceRequestSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide date which you need']
     },
+    type: {
+        type: String,
+        default: 'computer'
+    },
     category: {
         type: String,
         required: [true, 'Please provide service category']

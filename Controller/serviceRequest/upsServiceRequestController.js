@@ -53,14 +53,14 @@ const getUpsServiceRequestByEmail = async (req, res) => {
                 message: 'User does not exist'
             })
         } else {
-            const serviceRequest = await UpsServiceRequest.find({
+            const data = await UpsServiceRequest.find({
                 email: req.params.email,
                 isRequest: true
             });
-            if (serviceRequest.length) {
+            if (data.length) {
                 res.status(200).json({
                     success: true,
-                    serviceRequest
+                    data
                 })
             } else {
                 res.status(401).json({

@@ -21,7 +21,7 @@ const createGetRequest = async (req, res) => {
 const getAllRequest = async (req, res) => {
     try {
         const allRequest = await GetRequestForm.find()
-        if (!allRequest) {
+        if (!allRequest.length) {
             res.status(404).json({
                 success: false,
                 message: 'Request not found'

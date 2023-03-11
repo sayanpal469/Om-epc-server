@@ -19,6 +19,7 @@ const computerRoutes = require('./Routes/ProductsRoutes/computerRoutes');
 const UpsRoutes = require('./Routes/ProductsRoutes/upsRoutes');
 const PrinterRoutes = require('./Routes/ProductsRoutes/printerRoutes');
 const SurveillanceRoutes = require('./Routes/ProductsRoutes/surveillanceRoutes');
+const carrerRoutes = require('./Routes/carrerRoutes');
 const app = express();
 
 app.use(express.json());
@@ -47,38 +48,39 @@ app.use('/api/omEpc', PrinterRoutes);
 app.use('/api/omEpc', SurveillanceRoutes);
 
 
-
-
-
-app.use('/api/omEpc', productRoutes)
+app.use('/api/omEpc', productRoutes);
 
 // Customer buy request api
-app.use('/api/omEpc', buyRequestRoutes)
+app.use('/api/omEpc', buyRequestRoutes);
 
 // Services api
-app.use('/api/omEpc', serviceRoutes)
+app.use('/api/omEpc', serviceRoutes);
 
 
 // Services requests apis starts here =======================
 // Computer and laptop services requests api
-app.use('/api/omEpc', computerServiceRequestRoute)
+app.use('/api/omEpc', computerServiceRequestRoute);
 // UPS services requests api
-app.use('/api/omEpc', upsServiceRequestRoutes)
+app.use('/api/omEpc', upsServiceRequestRoutes);
 // Printer services requests api
-app.use('/api/omEpc', printerServiceRequestRoutes)
+app.use('/api/omEpc', printerServiceRequestRoutes);
 // Surveillance services requests api
-app.use('/api/omEpc', surveillanceServiceRequestRoutes)
+app.use('/api/omEpc', surveillanceServiceRequestRoutes);
 // Services requests apis ends here =======================
 
 // Sign up api
-app.use('/api/omEpc', signupRoutes)
+app.use('/api/omEpc', signupRoutes);
 
 // login api
-app.use('/api/omEpc', loginRoutes)
+app.use('/api/omEpc', loginRoutes);
 
 // Check for forget password api
-app.use('/api/omEpc', checkEmailRoutes)
-app.use('/api/omEpc', forgetPassRoutes)
+app.use('/api/omEpc', checkEmailRoutes);
+app.use('/api/omEpc', forgetPassRoutes);
+
+
+// Carrer api
+app.use('/api/omEpc', carrerRoutes);
 
 
 

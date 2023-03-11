@@ -5,9 +5,17 @@ const surveillanceServiceRequestSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide date which you need']
     },
+    type: {
+        type: String,
+        default: 'surveillance'
+    },
     category: {
         type: String,
         required: [true, 'Please provide service category']
+    },
+    item: {
+        type: String,
+        default: 'surveillance'
     },
     brand: {
         type: String,
