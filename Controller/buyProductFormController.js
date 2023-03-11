@@ -1,4 +1,5 @@
 const UserOrders = require('../Models/buyProductFormModel');
+const UserModel = require('../Models/userModel');
 
 
 // Create request
@@ -44,7 +45,7 @@ const getAllBuyRequest = async (req, res) => {
 // Get request by email
 const getBuyRequestByEmail = async (req, res) => {
     try {
-        const userEmail = await UserOrders.find({
+        const userEmail = await UserModel.findOne({
             email: req.params.email
         })
         if (!userEmail) {
@@ -53,10 +54,11 @@ const getBuyRequestByEmail = async (req, res) => {
                 message: 'User does not exist'
             })
         } else {
-            const available = await UserOrders.find({ email: req.params.email, isOrder: true});
+            const available = await UserOrders.find({
+                email: req.params.email,
+                isOrder: true
+            });
             if (available.length) {
-                // const orderProducts = available.filter(product => product.product)
-                // console.log(orderProducts)
                 res.status(200).json({
                     success: true,
                     available
@@ -112,13 +114,20 @@ const updateComplete = async (req, res) => {
                 message: 'Order not found'
             })
         } else {
-            data = await UserOrders.findByIdAndUpdate(req.params.id, req.body, {
-                new: true
-            })
-            res.status(200).json({
-                success: true,
-                data
-            })
+            if (data.isCompleted) {
+                res.status(501).json({
+                    success: false,
+                    message: 'This order already completed'
+                })
+            } else {
+                data = await UserOrders.findByIdAndUpdate(req.params.id, req.body, {
+                    new: true
+                })
+                res.status(200).json({
+                    success: true,
+                    data
+                })
+            }
         }
     } catch (error) {
         res.status(500).json({
@@ -129,7 +138,7 @@ const updateComplete = async (req, res) => {
 };
 
 
-
+// Cancel Order
 const updateCanceled = async (req, res) => {
     try {
         let data = await UserOrders.findById(req.params.id)
@@ -139,13 +148,27 @@ const updateCanceled = async (req, res) => {
                 message: 'Order not found'
             })
         } else {
-            data = await UserOrders.findByIdAndUpdate(req.params.id, req.body, {
-                new: true
-            })
-            res.status(200).json({
-                success: true,
-                message: 'Order Canceled'
-            })
+            if (data.isCompleted) {
+                res.status(501).json({
+                    success: false,
+                    message: 'This order already completed, You can not cancel this order'
+                })
+            } else {
+                if (data.isCanceled) {
+                    res.status(502).json({
+                        success: false,
+                        message: 'This order already canceled'
+                    })
+                } else {
+                    data = await UserOrders.findByIdAndUpdate(req.params.id, req.body, {
+                        new: true
+                    })
+                    res.status(200).json({
+                        success: true,
+                        message: 'Order Canceled'
+                    })
+                }
+            }
         }
     } catch (error) {
         res.status(500).json({
@@ -159,7 +182,9 @@ const updateCanceled = async (req, res) => {
 
 const deleteOrder = async (req, res) => {
     try {
-        const order = await UserOrders.findByIdAndDelete({_id: req.params.id})
+        const order = await UserOrders.findByIdAndDelete({
+            _id: req.params.id
+        })
         if (!order) {
             res.status(404).json({
                 success: false,

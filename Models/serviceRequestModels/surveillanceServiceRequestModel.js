@@ -41,7 +41,15 @@ const surveillanceServiceRequestSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide your message']
     },
-    responseStatus: {
+    isRequest: {
+        type: Boolean,
+        default: true
+    },
+    isCanceled: {
+        type: Boolean,
+        default: false
+    },
+    isCompleted: {
         type: Boolean,
         default: false
     },

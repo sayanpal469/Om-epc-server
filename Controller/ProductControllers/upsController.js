@@ -3,7 +3,7 @@ const UPS = require('../../Models/ProductModels/upsModel');
 // Create ups
 const createUps = async (req, res) => {
     try {
-        // console.log(req.file)
+        // console.log(req.body)
         const newProduct = await UPS.create({
             brand: req.body.brand,
             modelNumber: req.body.modelNumber,
