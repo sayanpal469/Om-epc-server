@@ -1,4 +1,5 @@
 const GetRequestForm = require('../Models/getRequestModel');
+const UserModel = require('../Models/userModel');
 
 
 // Create request
@@ -26,12 +27,12 @@ const getAllRequest = async (req, res) => {
                 success: false,
                 message: 'Request not found'
             })
+        } else {
+            res.status(201).json({
+                success: true,
+                allRequest
+            })
         }
-
-        res.status(201).json({
-            success: true,
-            allRequest
-        })
     } catch (error) {
         res.status(500).json({
             message: error.message
@@ -42,19 +43,20 @@ const getAllRequest = async (req, res) => {
 // Get Request by email
 const getRequestByEmail = async (req, res) => {
     try {
-        const getRequestClient = await GetRequestForm.find({
+        const request = await GetRequestForm.find({
             email: req.params.email
         })
-        if (!getRequestClient) {
-            res.status(404).json({
+        if (!request.length) {
+            res.status(405).json({
                 success: false,
-                message: 'User does not exist'
+                message: 'Request not found'
+            })
+        } else {
+            res.status(201).json({
+                success: true,
+                request
             })
         }
-        res.status(201).json({
-            success: true,
-            getRequestClient
-        })
     } catch (error) {
         res.status(500).json({
             message: error.message

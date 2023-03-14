@@ -20,6 +20,7 @@ const UpsRoutes = require('./Routes/ProductsRoutes/upsRoutes');
 const PrinterRoutes = require('./Routes/ProductsRoutes/printerRoutes');
 const SurveillanceRoutes = require('./Routes/ProductsRoutes/surveillanceRoutes');
 const carrerRoutes = require('./Routes/carrerRoutes');
+const refurbishedRoutes = require('./Routes/ProductsRoutes/refurbishedRoutes');
 const app = express();
 
 app.use(express.json());
@@ -33,7 +34,7 @@ app.use('/uploads', express.static('uploads'))
 // Get customer request api
 app.use('/api/omEpc', getRequestRoutes);
 
-// Product apis=============================
+// Product apis starts here =============================
 
 // Computer api=========
 app.use('/api/omEpc', computerRoutes);
@@ -47,6 +48,10 @@ app.use('/api/omEpc', PrinterRoutes);
 // Surveillance api=========
 app.use('/api/omEpc', SurveillanceRoutes);
 
+// Refurbished apis=========
+app.use('/api/omEpc', refurbishedRoutes);
+
+// Product apis ends here =============================
 
 app.use('/api/omEpc', productRoutes);
 
