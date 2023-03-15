@@ -3,9 +3,7 @@ const cors = require('cors');
 // const multer = require('multer');
 const bodyParser = require('body-parser');
 const getRequestRoutes = require('./Routes/getRequestRoutes');
-const productRoutes = require('./Routes/productRoutes');
 const buyRequestRoutes = require('./Routes/buyRequestRoutes');
-
 const signupRoutes = require('./Routes/authRoutes/signUpRoutes');
 const loginRoutes = require('./Routes/authRoutes/loginRoutes');
 const checkEmailRoutes = require('./Routes/authRoutes/checkEmailRoutes');
@@ -21,6 +19,7 @@ const PrinterRoutes = require('./Routes/ProductsRoutes/printerRoutes');
 const SurveillanceRoutes = require('./Routes/ProductsRoutes/surveillanceRoutes');
 const carrerRoutes = require('./Routes/carrerRoutes');
 const refurbishedRoutes = require('./Routes/ProductsRoutes/refurbishedRoutes');
+const accesoriesRoutes = require('./Routes/ProductsRoutes/accesoriesRoutes');
 const app = express();
 
 app.use(express.json());
@@ -51,9 +50,10 @@ app.use('/api/omEpc', SurveillanceRoutes);
 // Refurbished apis=========
 app.use('/api/omEpc', refurbishedRoutes);
 
+// Accesories apis
+app.use('/api/omEpc', accesoriesRoutes);
 // Product apis ends here =============================
 
-app.use('/api/omEpc', productRoutes);
 
 // Customer buy request api
 app.use('/api/omEpc', buyRequestRoutes);

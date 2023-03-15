@@ -40,9 +40,34 @@ const getAllBuyRequest = async (req, res) => {
             message: error.message
         });
     }
+};
+
+
+// Get order by id
+const getOrderById = async (req, res) => {
+    try {
+        const data = await UserOrders.findById(req.params.id);
+        console.log(data)
+        if (!data) {
+            res.status(404).json({
+                success: false,
+                message: 'Order not found'
+            })
+        } else {
+            res.status(200).json({
+                success: true,
+                data
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
 }
 
-// Get request by email
+// Get order by email
 const getBuyRequestByEmail = async (req, res) => {
     try {
         const userEmail = await UserModel.findOne({
@@ -76,7 +101,7 @@ const getBuyRequestByEmail = async (req, res) => {
             message: error.message
         });
     }
-}
+};
 
 // Update Shipped order
 const updateShipped = async (req, res) => {
@@ -95,6 +120,51 @@ const updateShipped = async (req, res) => {
                 success: true,
                 data
             })
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+};
+
+
+// Update Out of delevery status
+const updateOutOfDelevery = async (req, res) => {
+    try {
+        let data = await UserOrders.findById(req.params.id)
+        if (!data) {
+            res.status(404).json({
+                success: false,
+                message: 'Order not found'
+            })
+        } else {
+            if (data.outOfDelivery) {
+                res.status(501).json({
+                    success: false,
+                    message: 'This order already out of delivery'
+                })
+            } else if (data.isCanceled) {
+                res.status(502).json({
+                    success: false,
+                    message: 'This order already canceled'
+                })
+            } else if (data.isShipped) {
+                data = await UserOrders.findByIdAndUpdate(req.params.id, req.body, {
+                    new: true
+                })
+                res.status(200).json({
+                    success: true,
+                    data
+                })
+            } else {
+                res.status(502).json({
+                    success: false,
+                    message: 'This order does not shipped'
+                })
+            }
+
         }
     } catch (error) {
         res.status(500).json({
@@ -137,7 +207,6 @@ const updateComplete = async (req, res) => {
     }
 };
 
-
 // Cancel Order
 const updateCanceled = async (req, res) => {
     try {
@@ -179,7 +248,6 @@ const updateCanceled = async (req, res) => {
 };
 
 
-
 const deleteOrder = async (req, res) => {
     try {
         const order = await UserOrders.findByIdAndDelete({
@@ -207,8 +275,10 @@ const deleteOrder = async (req, res) => {
 module.exports = {
     createBuyRequest,
     getAllBuyRequest,
+    getOrderById,
     getBuyRequestByEmail,
     updateShipped,
+    updateOutOfDelevery,
     updateComplete,
     updateCanceled,
     deleteOrder

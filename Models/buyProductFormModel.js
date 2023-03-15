@@ -55,6 +55,10 @@ const userOrders = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    outOfDelivery: {
+        type: Boolean,
+        default: false
+    },
     isCompleted: {
         type: Boolean,
         default: false

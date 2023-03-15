@@ -1,21 +1,21 @@
-const Products = require('../Models/productModel');
+const AccesoriesModel = require('../../Models/ProductModels/accesoriesModel');
 
 // Create product
 const createProduct = async (req, res) => {
     try {
         // console.log(req.file)
-        const newProduct = await Products.create({
-            name: req.body.name,
-            model: req.body.model,
+        const data = await AccesoriesModel.create({
+            type: req.body.type,
+            modelName: req.body.modelName,
+            brand: req.body.brand,
             image: req.file.filename,
             price: req.body.price,
-            category: req.body.category,
-            brand: req.body.brand,
-            description: req.body.description,
+            wrongPrice: req.body.wrongPrice,
+            description: req.body.description
         });
         res.status(200).json({
             success: true,
-            newProduct,
+            data
         });
     } catch (error) {
         res.status(500).json({
@@ -28,10 +28,10 @@ const createProduct = async (req, res) => {
 
 
 // Get all products
-const getProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
     try {
-        const products = await Products.find()
-        if (!products.length) {
+        const data = await AccesoriesModel.find()
+        if (!data.length) {
             res.status(404).json({
                 success: false,
                 message: 'Product not found'
@@ -39,7 +39,7 @@ const getProducts = async (req, res) => {
         } else {
             res.status(200).json({
                 success: true,
-                products
+                data
             })
         }
     } catch (error) {
@@ -53,8 +53,8 @@ const getProducts = async (req, res) => {
 // Get singel product
 const getSingelProduct = async (req, res) => {
     try {
-        const product = await Products.findById(req.params.id)
-        if (!product) {
+        const data = await AccesoriesModel.findById(req.params.id)
+        if (!data) {
             res.status(404).json({
                 success: false,
                 message: 'Product not found'
@@ -62,7 +62,7 @@ const getSingelProduct = async (req, res) => {
         } else {
             res.status(200).json({
                 success: true,
-                product
+                data
             })
         }
     } catch (error) {
@@ -75,10 +75,12 @@ const getSingelProduct = async (req, res) => {
 
 
 // Get product by category
-const getProductsByCategory = async (req, res) => {
+const getProductsByType = async (req, res) => {
     try {
-        const products = await Products.find({category: req.params.category})
-        if (!products) {
+        const data = await AccesoriesModel.find({
+            type: req.params.type
+        })
+        if (!data.length) {
             res.status(404).json({
                 success: false,
                 message: 'Product not found'
@@ -86,7 +88,7 @@ const getProductsByCategory = async (req, res) => {
         } else {
             res.status(200).json({
                 success: true,
-                products
+                data
             })
         }
     } catch (error) {
@@ -100,8 +102,10 @@ const getProductsByCategory = async (req, res) => {
 // Delete Product
 const deleteProduct = async (req, res) => {
     try {
-        const product = await Products.findByIdAndDelete({_id: req.params.id})
-        if (!product) {
+        const data = await AccesoriesModel.findByIdAndDelete({
+            _id: req.params.id
+        })
+        if (!data) {
             res.status(404).json({
                 success: false,
                 message: 'Not found'
@@ -110,7 +114,6 @@ const deleteProduct = async (req, res) => {
             res.status(200).json({
                 success: true,
                 message: 'Product deleted',
-                product
             })
         }
     } catch (error) {
@@ -123,8 +126,8 @@ const deleteProduct = async (req, res) => {
 
 module.exports = {
     createProduct,
-    getProducts,
+    getAllProducts,
     getSingelProduct,
-    getProductsByCategory,
+    getProductsByType,
     deleteProduct
 };
