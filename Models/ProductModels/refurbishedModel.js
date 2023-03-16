@@ -25,6 +25,10 @@ const refurbishedSchema = mongoose.Schema({
         type: Number,
         required: [true, 'Please enter product wrong price']
     },
+    refurbished: {
+        type: Boolean,
+        default: true
+    },
     description: {
         type: String,
         required: [true, 'Please provide product description']
